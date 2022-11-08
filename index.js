@@ -1,19 +1,26 @@
-const imgArray = [
-  "img1.webp",
-  "img2.webp",
-  "img3.webp",
-  "img4.webp",
-  "img5.webp",
-];
-const container = document.querySelector("#container");
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
 
-const createImageCard = (img) => {
-  const card = document.createElement("div");
-  card.classList.add("imgCard");
-  const cardImg = new Image();
-  cardImg.src = "./assets/" + img;
-  card.appendChild(cardImg);
-  return card;
-};
+const images = document.querySelectorAll(".imgCard");
 
-imgArray.map((img) => container.appendChild(createImageCard(img)));
+let currentIndex = 0;
+
+nextBtn.addEventListener("click", () => {
+  if (currentIndex === 4) {
+    currentIndex = 0;
+  } else {
+    currentIndex += 1;
+  }
+  [...images].map((el) => el.classList.remove("active"));
+  images[currentIndex].classList.add("active");
+});
+
+prevBtn.addEventListener("click", () => {
+  if (currentIndex === 0) {
+    currentIndex = 4;
+  } else {
+    currentIndex -= 1;
+  }
+  [...images].map((el) => el.classList.remove("active"));
+  images[currentIndex].classList.add("active");
+});
